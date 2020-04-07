@@ -22,9 +22,11 @@ public class ScheduledTaskAfvalkalender {
 	public void doSomethingAfterStartup() {
 	    LOG.info("hello world, I have just started up");
 	    service.getOphaalData();
+	    LOG.info("Ready to rock!! ");
 	}
 
-	@Scheduled(cron="0 0 23 * * ?")
+	// should run every sat at 23
+	@Scheduled(cron="0 0 23 * * SAT")
     public void refreshOphaalData() {
         LOG.info("refresh ophaaldata via schedule @ {}", new Date());
         service.getOphaalData();
