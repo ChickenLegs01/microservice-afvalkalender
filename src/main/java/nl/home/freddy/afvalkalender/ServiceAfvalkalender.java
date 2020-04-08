@@ -80,18 +80,16 @@ public class ServiceAfvalkalender {
 	// -1=error
 	public String getAfval() {
 
-		// only give a possible result between 1pm and 7am
 		GregorianCalendar cal = new GregorianCalendar();
 		cal.setTime(new Date());
-		if(!isTimeOkForReturn(cal)) return "0";
+
+		// dont need this any more
+		//if(!isTimeOkForReturn(cal)) return "0";
 
 		for(ModelAfvalkalender mod: ophaalList) {
 			long milli = mod.getOphaaldatum().getTime() - cal.getTimeInMillis();
-
-//			long days = milli/1000/60/60/24;
 			long hours = milli/1000/60/60;
 
-//			LOG.info("number of days = " + days + ", number of hours = " + hours);
 			if(hours >0 && hours < 15  ) {
 				LOG.info("Found date match " + mod.getOphaaldatum() + " for afval: " + mod.getAfvalstroomId());
 				return ""+mod.getAfvalstroomId();
